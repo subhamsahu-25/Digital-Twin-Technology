@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Twins in Mining — Rock-On-Pap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── FIXED PROGRESS BAR ──────────────────────────────────── -->
+<div id="progress"></div>
+
+<!-- ── NAVIGATION DOTS ─────────────────────────────────────── -->
+<div id="nav-dots"></div>
+
+<!-- ── ARROW BUTTONS ───────────────────────────────────────── -->
+<div id="nav-arrows">
+  <button class="abtn" onclick="prevSlide()">↑</button>
+  <button class="abtn" onclick="nextSlide()">↓</button>
+</div>
+
+<!-- ── SCROLL HINT ─────────────────────────────────────────── -->
+<span id="hint">↕ SCROLL OR ARROW KEYS</span>
+
+<!-- ── CONFIG TRIGGER BUTTON ───────────────────────────────── -->
+<button onclick="document.getElementById('img-config').style.display='block'"
+  style="position:fixed;top:12px;left:14px;z-index:300;background:var(--surface);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;cursor:pointer;font-size:14px;"
+  title="Add images">⚙</button>
+
+<!-- ════════════════════════════════════════════════════════════
+     IMAGE CONFIG PANEL
+     Click the ⚙ button (top-left) during presentation to open
+════════════════════════════════════════════════════════════ -->
+<div id="img-config">
+  <div style="max-width:700px;margin:0 auto;font-family:'Space Mono',monospace;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
+      <h2 style="font-family:'Space Mono',monospace;font-size:16px;color:var(--amber);letter-spacing:4px;">IMAGE CONFIG</h2>
+      <button onclick="document.getElementById('img-config').style.display='none'"
+        style="background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;cursor:pointer;font-family:'Space Mono',monospace;">CLOSE ✕</button>
+    </div>
+    <p style="color:var(--muted);font-size:11px;margin-bottom:24px;line-height:1.7;">
+      Paste direct image URLs below (Google Images → right-click → Copy image address). Press APPLY to update the presentation.<br>
+      Suggested searches: "digital twin mine 3D visualization" / "Coal India underground mine" / "BHP Olympic Dam" / "Boliden Garpenberg mine"
+    </p>
+    <div id="img-fields"></div>
+    <button onclick="applyImages()"
+      style="background:var(--amber);color:#000;border:none;padding:10px 28px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;margin-top:18px;width:100%;">
+      APPLY IMAGES TO PRESENTATION
+    </button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     SLIDE DECK
+════════════════════════════════════════════════════════════ -->
+<div id="deck">
+
+<!-- ─────────────────────────────────────────────────────────
+     S1 · TITLE
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s1">
+  <img id="bg-s1" src="" onerror="this.style.display='none'"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.15;z-index:0;pointer-events:none;display:none;" alt="">
+  <div class="grid-bg"></div>
+  <canvas id="c-title" style="position:absolute;inset:0;z-index:1;pointer-events:none;"></canvas>
+  <div class="abar"></div>
+  <div class="snum">01 / 13</div>
+  <div class="sc" style="z-index:2;">
+    <div class="lbl">Rock-On-Pap 2026 · NIT Rourkela</div>
+    <h1>Digital<br><span class="hl">Twins</span><br>in Mining</h1>
+    <p style="font-size:16px;color:#9a9085;max-width:520px;margin-top:12px;">A framework for implementing real-time virtual mine models in Indian underground coal and metalliferous mines</p>
+    <div style="display:flex;gap:9px;margin-top:22px;flex-wrap:wrap;">
+      <span class="tag lit">Mining Engineering</span>
+      <span class="tag">Industry 4.0</span>
+      <span class="tag">IoT + AI</span>
+      <span class="tag">Safety Systems</span>
+    </div>
+    <div style="margin-top:34px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;">NIT Rourkela · Department of Mining Engineering · 2026</div>
+  </div>
+  <div style="position:absolute;bottom:-30px;right:-10px;font-family:'Bebas Neue',cursive;font-size:24vw;color:rgba(245,158,11,0.025);line-height:1;pointer-events:none;user-select:none;z-index:1;">DT</div>
+  <div style="position:absolute;bottom:14px;left:72px;font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;z-index:2;">ROCK-ON-PAP · TECHNICAL PAPER PRESENTATION</div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S2 · THE PROBLEM
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s2">
+  <img id="bg-s2" src="" onerror="this.style.display='none'"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.09;z-index:0;pointer-events:none;display:none;" alt="">
+  <div class="grid-bg"></div>
+  <div class="snum">02 / 13</div>
+  <div class="sc" style="max-width:1100px;">
+    <div class="lbl">The Problem</div>
+    <h2>Indian Mining is <span class="hl">Flying Blind</span></h2>
+    <div class="ldeco" style="margin-top:16px;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;width:100%;margin-top:16px;">
+      <div>
+        <div class="statblk">
+          <div class="num" data-target="82" data-suffix="%">0%</div>
+          <div class="slbl">of Indian mines rely on manual inspection with 24–72hr data lag</div>
+        </div>
+        <div class="statblk">
+          <div class="num" data-target="346" data-suffix="+">0</div>
+          <div class="slbl">fatalities in Indian mines 2015–2022 (DGMS Annual Reports)</div>
+        </div>
+        <div class="statblk">
+          <div class="num" data-target="2400" data-suffix="Cr">0</div>
+          <div class="slbl">₹ estimated annual production loss from unplanned downtime</div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:10px;border:1px solid var(--amber);padding:7px 14px;background:rgba(245,158,11,.06);margin-top:10px;">
+          <span style="font-family:'Bebas Neue',cursive;font-size:32px;color:var(--amber);">$48B</span>
+          <span style="font-size:10px;color:var(--muted);">global DT mining market<br>projected 2026 (McKinsey)</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="border:1px solid var(--border);background:var(--surface);padding:14px;flex:1;">
+          <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);margin-bottom:8px;">INDIA MINE FATALITIES 2016–2022 · DGMS</div>
+          <canvas id="c-fatal" style="width:100%;height:160px;display:block;"></canvas>
+        </div>
+        <p style="font-size:12px;">Decisions are reactive, not predictive. Hazards discovered, not prevented. <span class="hl">Digital Twins change this.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S3 · WHAT IS A DIGITAL TWIN
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s3" style="justify-content:flex-start;padding-top:40px;">
+  <div class="grid-bg"></div>
+  <div class="snum">03 / 13</div>
+  <div class="sc" style="max-width:1100px;">
+    <div class="lbl">Foundational Concept</div>
+    <h2>What is a <span class="hl">Digital Twin?</span></h2>
+    <p style="max-width:800px;margin-top:6px;font-size:13px;">First defined by Dr. Michael Grieves (2002) — a <span class="hl">live virtual replica</span> of a physical system, continuously updated with real-time sensor data for simulation, monitoring, and predictive analysis.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;margin-top:12px;">
+      <!-- LEFT: interactive canvas twin -->
+      <div style="position:relative;border:1px solid var(--border);background:#0a0a0a;overflow:hidden;">
+        <div style="position:absolute;top:8px;left:10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);z-index:5;">LIVE SIMULATION</div>
+        <canvas id="c-twin" style="width:100%;height:200px;display:block;"></canvas>
+        <div style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(245,158,11,.25);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:8px;left:25%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--muted);">⛏ PHYSICAL</div>
+        <div style="position:absolute;bottom:8px;right:25%;transform:translateX(50%);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);">🖥 DIGITAL</div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;background:rgba(8,8,8,.85);padding:4px 8px;pointer-events:none;">
+          <div style="font-size:14px;color:var(--amber);">⇄</div>
+        </div>
+      </div>
+      <!-- RIGHT: YouTube search embed -->
+      <div style="position:relative;border:1px solid var(--border);overflow:hidden;background:#000;">
+        <div style="position:absolute;top:8px;left:10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);z-index:5;background:rgba(0,0,0,.7);padding:2px 6px;">VIDEO EXPLAINER</div>
+        <iframe id="vid-s3"
+          src="https://www.youtube.com/embed?listType=search&list=digital+twin+mining+explained&rel=0&modestbranding=1"
+          style="width:100%;height:200px;border:none;display:block;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:100%;margin-top:10px;">
+      <div style="border-left:2px solid var(--amber);padding-left:11px;"><div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--amber);letter-spacing:2px;margin-bottom:2px;">MONITOR</div><p style="font-size:11px;">Real-time visibility of all mine systems simultaneously</p></div>
+      <div style="border-left:2px solid var(--amber);padding-left:11px;"><div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--amber);letter-spacing:2px;margin-bottom:2px;">SIMULATE</div><p style="font-size:11px;">Run blast, emergency, failure scenarios — completely risk free</p></div>
+      <div style="border-left:2px solid var(--amber);padding-left:11px;"><div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--amber);letter-spacing:2px;margin-bottom:2px;">PREDICT</div><p style="font-size:11px;">AI/ML flags hazards 48–72 hrs before physical manifestation</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S4 · APPLICATIONS
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s4">
+  <div class="grid-bg"></div>
+  <div class="snum">04 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Application Domain</div>
+    <h2>Digital Twins in <span class="hl">Mining Operations</span></h2>
+    <div class="pillars">
+      <div class="pillar"><div class="pico">🗺️</div><h4>Geological Modelling</h4><p>3D orebody models updated with real-time drilling and grade data — dynamic resource estimation and adaptive mine planning.</p></div>
+      <div class="pillar"><div class="pico">🌬️</div><h4>Ventilation Simulation</h4><p>Virtual airflow models synced with live sensors — predict gas accumulation zones and auto-trigger ventilation before hazard thresholds.</p></div>
+      <div class="pillar"><div class="pico">⚙️</div><h4>Equipment Health</h4><p>Continuous vibration, temp, and load monitoring of LHDs and conveyors — predicting failures 48–72hrs in advance via LSTM networks.</p></div>
+      <div class="pillar"><div class="pico">🏗️</div><h4>Ground Control</h4><p>Geomechanical twin fed by roof bolt sensors — early warning of strata failure and subsidence before visual indicators appear.</p></div>
+      <div class="pillar"><div class="pico">👷</div><h4>Personnel Tracking</h4><p>Real-time spatial mapping of all personnel underground. Automated emergency mustering and evacuation routing in crisis scenarios.</p></div>
+      <div class="pillar"><div class="pico">📊</div><h4>Production Optimisation</h4><p>Haulage simulation, bottleneck identification, and shift scheduling — OEE improvement 15–25% without additional capital investment.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S5 · WHY INDIA NEEDS THIS NOW
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s5">
+  <div class="grid-bg"></div>
+  <div class="snum">05 / 13</div>
+  <div class="sc" style="max-width:950px;">
+    <div class="lbl">Context</div>
+    <h2>Why India <span class="hl">Needs This Now</span></h2>
+    <div class="ldeco" style="margin-top:12px;"></div>
+    <ul class="chlist">
+      <li><div class="cnum">01</div><div class="ctxt" style="flex:1;"><strong>Ageing Infrastructure</strong><span>Over 60% of Indian coal mines are 30+ years old with legacy systems incapable of real-time safety data generation.</span><div class="cbar-track"><div class="cbar-fill" data-width="60"></div></div></div></li>
+      <li><div class="cnum">02</div><div class="ctxt" style="flex:1;"><strong>High Accident Rate</strong><span>India's mine fatality rate is 3–4× higher than OECD nations. Predictive detection could eliminate most precursor incidents.</span><div class="cbar-track"><div class="cbar-fill" data-width="80"></div></div></div></li>
+      <li><div class="cnum">03</div><div class="ctxt" style="flex:1;"><strong>Regulatory Pressure</strong><span>DGMS and MoC mandating digital transformation under National Mineral Policy 2019 — early adopters gain compliance advantage.</span><div class="cbar-track"><div class="cbar-fill" data-width="70"></div></div></div></li>
+      <li><div class="cnum">04</div><div class="ctxt" style="flex:1;"><strong>Global Competitiveness Gap</strong><span>Australian, Chilean, and Scandinavian mines operate full DT ecosystems. India risks permanently falling behind in productivity per tonne.</span><div class="cbar-track"><div class="cbar-fill" data-width="90"></div></div></div></li>
+      <li><div class="cnum">05</div><div class="ctxt" style="flex:1;"><strong>Energy Transition Demand</strong><span>India needs 50+ lithium, 60+ nickel mines by 2030. Digital twins maximise recovery from existing capacity during the transition window.</span><div class="cbar-track"><div class="cbar-fill" data-width="75"></div></div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S6 · PROPOSED 4-LAYER FRAMEWORK
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s6" style="justify-content:flex-start;padding-top:38px;">
+  <div class="grid-bg"></div>
+  <div class="snum">06 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Our Contribution</div>
+    <h2 style="font-size:clamp(26px,4vw,50px);">Proposed <span class="hl">4-Layer Framework</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 185px;gap:14px;width:100%;margin-top:12px;">
+      <div style="display:flex;flex-direction:column;gap:0;position:relative;">
+        <div id="fw-ptrak" style="position:absolute;left:50%;top:0;bottom:0;width:0;overflow:visible;pointer-events:none;z-index:5;"></div>
+        <div class="fw-layer amb"><span class="ltag">LAYER 4 · DECISION</span><strong>AI-Driven Alerts &amp; Optimisation Engine</strong><span style="margin-left:auto;font-size:16px;">⚡</span></div>
+        <div class="fw-arr">↕</div>
+        <div class="fw-layer"><span class="ltag">LAYER 3 · INTELLIGENCE</span><strong>ML Models + Simulation Engine</strong><span style="margin-left:auto;font-size:16px;">🧠</span></div>
+        <div class="fw-arr">↕</div>
+        <div class="fw-layer"><span class="ltag">LAYER 2 · INTEGRATION</span><strong>Cloud / Edge Gateway + Data Normalisation</strong><span style="margin-left:auto;font-size:16px;">🔗</span></div>
+        <div class="fw-arr">↕</div>
+        <div class="fw-layer acc"><span class="ltag">LAYER 1 · SENSING</span><strong>IoT Sensors + Wearables + CCTV + WLAN Underground Mesh</strong><span style="margin-left:auto;font-size:16px;">📡</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div style="border:1px solid var(--border);padding:10px;background:var(--surface);flex:1;display:flex;flex-direction:column;">
+          <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);margin-bottom:6px;">DATA VOLUME · LAYER</div>
+          <canvas id="c-dflow" style="flex:1;width:100%;"></canvas>
+        </div>
+        <div style="border:1px solid var(--amber);padding:9px 11px;background:rgba(245,158,11,.05);">
+          <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);margin-bottom:3px;">KEY PRINCIPLE</div>
+          <p style="font-size:10px;line-height:1.5;color:var(--muted);">Each layer independently deployable — phased rollout matching India's investment constraints.</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;margin-top:10px;">
+      <div style="border:1px solid var(--border);padding:7px 11px;background:var(--surface);display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">📡</span><div><div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--amber);">SENSE</div><p style="font-size:10px;color:var(--muted);margin:0;">Real-time data ingestion</p></div></div>
+      <div style="border:1px solid var(--border);padding:7px 11px;background:var(--surface);display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🔗</span><div><div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--amber);">INTEGRATE</div><p style="font-size:10px;color:var(--muted);margin:0;">Edge + cloud unification</p></div></div>
+      <div style="border:1px solid var(--border);padding:7px 11px;background:var(--surface);display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🧠</span><div><div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--amber);">ANALYSE</div><p style="font-size:10px;color:var(--muted);margin:0;">ML predictions</p></div></div>
+      <div style="border:1px solid var(--amber);padding:7px 11px;background:rgba(245,158,11,.05);display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">⚡</span><div><div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--amber);">ACT</div><p style="font-size:10px;color:var(--muted);margin:0;">Automated decisions</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S7 · KEY COMPONENTS
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s7">
+  <div class="grid-bg"></div>
+  <div class="snum">07 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Framework Deep Dive</div>
+    <h2>Key <span class="hl">Components</span></h2>
+    <div class="comps">
+      <div class="comp"><div class="ctag">Sensing Layer</div><h4>IoT Sensor Network</h4><p>Gas detectors (CH₄, CO, O₂), seismic sensors, roof extensometers, vibration monitors, RFID personnel tags — networked over leaky feeder or Wi-Fi 6 mesh underground.</p></div>
+      <div class="comp"><div class="ctag">Integration Layer</div><h4>Edge + Cloud Gateway</h4><p>Edge nodes at shaft bottom for low-latency local processing. Cloud backend for long-term analytics, model training, and remote access by surface engineers.</p></div>
+      <div class="comp"><div class="ctag">Modelling Layer</div><h4>3D Mine Model</h4><p>BIM/CIM-based dynamic 3D model updated with survey data. Geomechanical, ventilation, and hydrological sub-models run in parallel with live sensor feeds.</p></div>
+      <div class="comp"><div class="ctag">Intelligence Layer</div><h4>ML Analytics Engine</h4><p>LSTM networks for equipment predictive maintenance, isolation forests for gas anomaly detection, RL agents for ventilation and production scheduling.</p></div>
+      <div class="comp"><div class="ctag">Decision Layer</div><h4>Unified Dashboard</h4><p>Single-pane interface: colour-coded hazard zones, equipment health scores, production KPIs, automated alert escalation to DGMS-compliant regulatory logs.</p></div>
+      <div class="comp"><div class="ctag">Feedback Layer</div><h4>Continuous Calibration</h4><p>Actual-vs-predicted reconciliation feeds back into model parameters. Survey, blast results, and equipment logs create a self-improving twin over time.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S8 · IMPLEMENTATION ROADMAP
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s8">
+  <div class="grid-bg"></div>
+  <div class="snum">08 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Deployment Strategy</div>
+    <h2>Implementation <span class="hl">Roadmap</span></h2>
+    <p style="margin:8px 0 4px;font-size:12px;">Phased rollout minimises capital risk and allows iterative validation — critical for Indian operators unfamiliar with DT deployments.</p>
+    <div class="roadmap">
+      <div class="phase cur"><div class="phase-lbl">Phase 1</div><h4>Sensing &amp; Baseline</h4><ul><li>IoT sensor installation</li><li>Underground mesh network</li><li>Data collection baseline</li><li>3D model construction</li></ul><div class="phase-time">0–6 mo</div><div class="phase-prog" data-width="100"></div></div>
+      <div class="phase"><div class="phase-lbl">Phase 2</div><h4>Integration</h4><ul><li>Edge + cloud gateway</li><li>Live data pipeline</li><li>Real-time twin sync</li><li>Dashboard v1</li></ul><div class="phase-time">6–14 mo</div><div class="phase-prog" data-width="75"></div></div>
+      <div class="phase"><div class="phase-lbl">Phase 3</div><h4>Intelligence</h4><ul><li>ML model training</li><li>Predictive maintenance</li><li>Ventilation simulation</li><li>Alert system active</li></ul><div class="phase-time">14–24 mo</div><div class="phase-prog" data-width="50"></div></div>
+      <div class="phase"><div class="phase-lbl">Phase 4</div><h4>Optimisation</h4><ul><li>Full production AI</li><li>Autonomous scheduling</li><li>Regulatory integration</li><li>Multi-mine scale</li></ul><div class="phase-time">24+ mo</div><div class="phase-prog" data-width="25"></div></div>
+    </div>
+    <div class="kpirow">
+      <div class="kpi"><div class="kbig">₹8–15Cr</div><div class="ksm">total investment over 3 years</div></div>
+      <div class="kpi"><div class="kbig">2.5–4 Yrs</div><div class="ksm">payback period</div></div>
+      <div class="kpi"><div class="kbig">+20%</div><div class="ksm">productivity gain (Micron 2023)</div></div>
+      <div class="kpi" style="border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.05);flex:1;">
+        <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--amber);margin-bottom:3px;">90% ADOPTION</div>
+        <p style="font-size:11px;">of surveyed mining organisations are using, implementing, or piloting digital twins (Bentley Systems, 2024)</p>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);background:var(--surface);padding:10px;width:100%;margin-top:10px;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);margin-bottom:6px;">PROJECTED ROI TRAJECTORY (₹ CRORE)</div>
+      <canvas id="c-roi" style="width:100%;height:80px;display:block;"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S9 · INTERNATIONAL CASE STUDIES
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s9">
+  <div class="grid-bg"></div>
+  <div class="snum">09 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Global Evidence</div>
+    <h2>International <span class="hl">Case Studies</span></h2>
+    <div class="cases">
+      <div class="ccard">
+        <div class="img-slot" style="width:100%;height:60px;background:var(--surface2);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;position:relative;">
+          <img id="img-c1" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+          <span class="img-slot-hint" style="font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;">+ ADD IMAGE VIA ⚙</span>
+        </div>
+        <div class="where">BHP · Olympic Dam · Australia</div>
+        <h4>Integrated Equipment Twin</h4>
+        <p>Full digital twin of haulage fleet + underground crushers. 200+ assets monitored continuously via predictive maintenance platform.</p>
+        <div class="rbar-wrap"><div class="rbar-lbl"><span>Downtime Reduction</span><span>18%</span></div><div class="rbar-track"><div class="rbar-fill" data-width="18"></div></div><div class="rbar-lbl" style="margin-top:4px;"><span>Maintenance Cost Saving</span><span>23%</span></div><div class="rbar-track"><div class="rbar-fill" data-width="23"></div></div></div>
+      </div>
+      <div class="ccard">
+        <div class="img-slot" style="width:100%;height:60px;background:var(--surface2);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;position:relative;">
+          <img id="img-c2" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+          <span class="img-slot-hint" style="font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;">+ ADD IMAGE VIA ⚙</span>
+        </div>
+        <div class="where">Codelco · El Teniente · Chile</div>
+        <h4>Ventilation Digital Twin</h4>
+        <p>World's largest underground copper mine — ventilation-on-demand backed by real-time airflow twin, replacing fixed schedules.</p>
+        <div class="rbar-wrap"><div class="rbar-lbl"><span>Energy Saving (Ventilation)</span><span>35%</span></div><div class="rbar-track"><div class="rbar-fill" data-width="35"></div></div><div class="rbar-lbl" style="margin-top:4px;"><span>Air Quality Compliance</span><span>+40%</span></div><div class="rbar-track"><div class="rbar-fill" data-width="40"></div></div></div>
+      </div>
+      <div class="ccard">
+        <div class="img-slot" style="width:100%;height:60px;background:var(--surface2);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;position:relative;">
+          <img id="img-c3" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+          <span class="img-slot-hint" style="font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;">+ ADD IMAGE VIA ⚙</span>
+        </div>
+        <div class="where">Boliden · Garpenberg · Sweden</div>
+        <h4>Full Mine Digital Twin</h4>
+        <p>One of the world's most digitalised underground mines. Twin covers geology, production, equipment and personnel — sub-minute refresh.</p>
+        <div class="rbar-wrap"><div class="rbar-lbl"><span>Grade Prediction Accuracy</span><span>+65%</span></div><div class="rbar-track"><div class="rbar-fill" data-width="65"></div></div><div class="rbar-lbl" style="margin-top:4px;"><span>Lost-Time Injuries (3 yr)</span><span>Zero</span></div><div class="rbar-track"><div class="rbar-fill" data-width="100" style="background:linear-gradient(90deg,#10b981,#34d399);"></div></div></div>
+      </div>
+      <div class="ccard">
+        <div class="img-slot" style="width:100%;height:60px;background:var(--surface2);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;position:relative;">
+          <img id="img-c4" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+          <span class="img-slot-hint" style="font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;">+ ADD IMAGE VIA ⚙</span>
+        </div>
+        <div class="where">Coal India · Jharia Coalfields · 2023</div>
+        <h4>Early Indian Adoption</h4>
+        <p>CIL pilot at Jharia — gas monitoring and roof stability sensing — validating technical feasibility in Indian geological conditions.</p>
+        <div class="rbar-wrap"><div class="rbar-lbl"><span>Sensor Network Viability</span><span>Confirmed</span></div><div class="rbar-track"><div class="rbar-fill" data-width="100"></div></div><div class="rbar-lbl" style="margin-top:4px;"><span>Full Rollout (NMP 2019)</span><span>Pending</span></div><div class="rbar-track"><div class="rbar-fill" data-width="30" style="background:var(--accent);"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S10 · EXPECTED BENEFITS
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s10">
+  <div class="grid-bg"></div>
+  <div class="snum">10 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Impact Analysis</div>
+    <h2>Expected <span class="hl">Benefits</span></h2>
+    <div style="display:flex;gap:16px;width:100%;margin-top:14px;align-items:flex-start;">
+      <div class="bengrid">
+        <div class="ben"><div class="bico">🛡️</div><div><h4>Safety</h4><p>40–60% reduction in fatal accident risk via early hazard detection + automated evacuation routing.</p></div></div>
+        <div class="ben"><div class="bico">📈</div><div><h4>Production Efficiency</h4><p>OEE improvement 15–25% via adaptive scheduling — no additional capital required.</p></div></div>
+        <div class="ben"><div class="bico">🔧</div><div><h4>Predictive Maintenance</h4><p>20–30% maintenance cost reduction, 18% drop in unplanned stoppages (global benchmark).</p></div></div>
+        <div class="ben"><div class="bico">⚡</div><div><h4>Energy Optimisation</h4><p>Ventilation-on-demand saves 25–35% of ventilation energy — the largest single power cost underground.</p></div></div>
+        <div class="ben"><div class="bico">📋</div><div><h4>Regulatory Compliance</h4><p>Automated DGMS reporting and real-time statutory logs reduce compliance burden and regulatory risk.</p></div></div>
+        <div class="ben"><div class="bico">🌱</div><div><h4>Sustainability</h4><p>Precise extraction reduces overblasting. Energy savings lower carbon intensity per tonne produced.</p></div></div>
+      </div>
+      <div style="border:1px solid var(--border);padding:12px;background:var(--surface);width:260px;flex-shrink:0;">
+        <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);margin-bottom:6px;">BENEFIT DIMENSIONS</div>
+        <canvas id="c-radar" style="width:100%;height:220px;display:block;"></canvas>
+        <div style="display:flex;gap:10px;margin-top:6px;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:2px;background:rgba(107,101,96,.5);"></div><span style="font-size:9px;color:var(--muted);">Without DT</span></div>
+          <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:2px;background:var(--amber);"></div><span style="font-size:9px;color:var(--muted);">With DT</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S11 · LIMITATIONS & CHALLENGES
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s11">
+  <div class="grid-bg"></div>
+  <div class="snum">11 / 13</div>
+  <div class="sc" style="max-width:950px;">
+    <div class="lbl">Critical Evaluation</div>
+    <h2>Limitations &amp; <span class="hl">Challenges</span></h2>
+    <p style="margin:8px 0;">A balanced assessment — acknowledging barriers is essential for a credible deployment roadmap.</p>
+    <div class="limgrid">
+      <div class="lim"><div class="lico">💰</div><div><h4>High Initial CapEx</h4><p>₹8–15Cr upfront is a barrier for smaller operators. Mitigated by phased rollout and NMP 2019 digitisation incentives.</p></div></div>
+      <div class="lim"><div class="lico">📡</div><div><h4>Underground Connectivity</h4><p>Deploying reliable wireless networks in deep, complex mine workings is technically challenging and maintenance-intensive.</p></div></div>
+      <div class="lim"><div class="lico">👨‍💻</div><div><h4>Skill Gap</h4><p>Indian mining workforce lacks data science + geomechanics crossover. Curriculum transformation at NIT Rourkela-level institutes is essential.</p></div></div>
+      <div class="lim"><div class="lico">🔒</div><div><h4>Data Security</h4><p>Orebody and production data are commercially sensitive. Hybrid edge-cloud architecture mitigates but doesn't eliminate cybersecurity risk.</p></div></div>
+      <div class="lim"><div class="lico">🏚️</div><div><h4>Legacy Infrastructure</h4><p>Retrofitting IoT into 30-year-old workings with non-standard layouts is far more complex than greenfield deployments.</p></div></div>
+      <div class="lim"><div class="lico">📐</div><div><h4>Model Accuracy Drift</h4><p>Twins require continuous calibration as mine geometry evolves. Without disciplined data management, predictions degrade over time.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S12 · FUTURE SCOPE
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s12" style="justify-content:flex-start;padding-top:36px;">
+  <div class="grid-bg"></div>
+  <div class="snum">12 / 13</div>
+  <div class="sc" style="max-width:1050px;">
+    <div class="lbl">Looking Ahead</div>
+    <h2>Future <span class="hl">Scope</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:16px;width:100%;margin-top:12px;align-items:start;">
+      <div>
+        <div class="futrow">
+          <div class="futitem"><div class="fbar"></div><div class="fyear">Near-term</div><p><strong>Autonomous Haulage Integration</strong> — Digital twins become the navigation backbone for autonomous LHDs and shuttle cars in Indian underground mines.</p></div>
+          <div class="futitem"><div class="fbar"></div><div class="fyear">Mid-term</div><p><strong>Multi-Mine Federated Networks</strong> — Twins across a company's portfolio enable benchmarking, shared learning, and group-level real-time optimisation.</p></div>
+          <div class="futitem"><div class="fbar"></div><div class="fyear">Mid-term</div><p><strong>Generative AI Integration</strong> — LLM-powered natural language: "What's the optimal blast sequence for Panel 7 given today's ground conditions?"</p></div>
+          <div class="futitem"><div class="fbar"></div><div class="fyear">Long-term</div><p><strong>Full Digital Mine Lifecycle</strong> — From exploration through closure, the twin becomes the single source of truth for every engineering and regulatory decision.</p></div>
+        </div>
+        <div style="margin-top:12px;border:1px solid var(--amber);padding:9px 14px;background:rgba(245,158,11,.05);">
+          <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);">INDUSTRY ADOPTION · </span>
+          <span style="font-size:11px;color:#b8b0a6;"> <span class="hl">90% of surveyed mining organisations</span> are using or piloting digital twins — safety cited as primary driver. <em style="color:var(--muted);">(Bentley Systems, 2024)</em></span>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);overflow:hidden;background:#000;">
+        <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--amber);padding:6px 10px;background:var(--surface);">MINE OF THE FUTURE · VIDEO</div>
+        <iframe id="vid-s12"
+          src="https://www.youtube.com/embed?listType=search&list=digital+twin+underground+mine+technology+2024&rel=0&modestbranding=1"
+          style="width:100%;height:220px;border:none;display:block;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     S13 · CONCLUSION
+───────────────────────────────────────────────────────── -->
+<section class="slide" id="s13">
+  <div class="grid-bg"></div>
+  <div class="abar"></div>
+  <div class="snum">13 / 13</div>
+  <div class="sc" style="max-width:950px;">
+    <div class="lbl">Conclusion</div>
+    <h2>The <span class="hl">Mine</span> of<br>Tomorrow is<br>Built Today</h2>
+    <div class="tkwrp">
+      <div class="tkw"><div class="tnum">1</div><div class="ttxt"><strong>Digital Twins are mature, proven technology</strong> — deployed globally with quantifiable results in safety, productivity, and cost reduction across BHP, Codelco, and Boliden.</div></div>
+      <div class="tkw"><div class="tnum">2</div><div class="ttxt"><strong>Indian mines face an urgent inflection point</strong> — 3–4× higher fatality rates, NMP 2019 mandates, and global competitive pressure demand immediate digital transformation.</div></div>
+      <div class="tkw"><div class="tnum">3</div><div class="ttxt"><strong>Our 4-layer framework</strong> provides a phased, practical pathway accounting for India's legacy infrastructure, DGMS regulatory context, and investment constraints.</div></div>
+      <div class="tkw"><div class="tnum">4</div><div class="ttxt"><strong>The ROI is compelling</strong> — ₹8–15Cr investment, 2.5–4 year payback. The safety benefits cannot be monetised — but they cannot be ignored either.</div></div>
+    </div>
+    <div class="refs">
+      <h4>KEY REFERENCES</h4>
+      <ul>
+        <li>Grieves, M. (2014). Digital Twin: Manufacturing Excellence through Virtual Factory Replication.</li>
+        <li>DGMS Annual Report (2022). Directorate General of Mines Safety, Government of India.</li>
+        <li>Cai, P. et al. (2021). Digital twin for coal mines: review and prospects. J. Mining &amp; Safety Engineering.</li>
+        <li>Bentley Systems (2024). State of Digital Twins in Mining — Annual Industry Survey.</li>
+        <li>BHP Insights (2025). The role of digital twins and AI in enhancing decision-making. bhp.com</li>
+        <li>National Mineral Policy (2019). Ministry of Mines, Government of India.</li>
+        <li>Coal India Limited Technology Innovation Report (2023). CIL Corporate Affairs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><!-- end #deck -->
+
+<script src="script.js"></script>
+</body>
+</html>
