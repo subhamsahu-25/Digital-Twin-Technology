@@ -1,3 +1,7 @@
+🌐 Live Demo
+https://subhamsahu-25.github.io/Digital-Twin-Technology/
+
+
 # Digital Twin Technology
 
 > A virtual replica of a physical system, continuously synchronized with its real-world counterpart through live sensor data.
