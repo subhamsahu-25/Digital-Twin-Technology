@@ -1,214 +1,172 @@
-# ⛏ Digital Twins in Mining
-### Rock-On-Pap 2026 · NIT Rourkela · Technical Paper Presentation
+# Digital Twin Technology
 
-> A fully interactive, scroll-snapping presentation built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies, no build step required.
-
----
-
-## 📁 Project Structure
-
-```
-rock-on-pap/
-├── index.html       # All slide markup — 13 slides, config panel, nav UI
-├── style.css        # All styles — variables, layout, components, animations
-├── script.js        # All logic — slide engine, canvas charts, interactivity
-└── README.md        # You are here
-```
+> A virtual replica of a physical system, continuously synchronized with its real-world counterpart through live sensor data.
 
 ---
 
-## 🚀 Getting Started
+## What is a Digital Twin?
 
-No installation or build process needed. Just open the file.
+A Digital Twin is a dynamic computational model of a physical asset, process, or system — kept up to date in real time by data streams from the physical world. It mirrors the true state of its counterpart at every moment, enabling simulation, prediction, and optimization without interacting with the physical asset directly.
 
-```bash
-# Option 1 — open directly in browser
-open index.html
-
-# Option 2 — serve locally (recommended for YouTube iframes)
-npx serve .
-# or
-python -m http.server 8080
-```
-
-> **Note:** YouTube embeds require a local server or live URL due to browser iframe policies. The canvas animations and all other features work fine with direct file open.
+The concept was first formally defined by **Dr. Michael Grieves** at the University of Michigan in **2002**, originally within Product Lifecycle Management (PLM). NASA later adopted and refined it for aerospace systems.
 
 ---
 
-## 🎮 Controls
+## Foundational Model — Grieves' Three Spaces
 
-| Action | Input |
+```
+┌─────────────────┐        Data Flow        ┌─────────────────┐
+│  PHYSICAL SPACE │ ──────────────────────► │  VIRTUAL SPACE  │
+│                 │                         │                 │
+│  Real asset     │ ◄────────────────────── │  Digital model  │
+│  Sensors / IoT  │      Control Actions    │  AI / Analytics │
+└─────────────────┘                         └─────────────────┘
+                        DATA CONNECTION
+                     (bidirectional link)
+```
+
+| Space | Description |
 |---|---|
-| Next slide | `↓` `→` `Space` or click **↓** button |
-| Previous slide | `↑` `←` or click **↑** button |
-| Jump to slide | Click any **dot** on the right sidebar |
-| Add images | Click **⚙** button (top-left) |
-| Add videos | Click **⚙** button → paste YouTube video ID |
+| **Physical** | The real-world asset — equipment, infrastructure, environment |
+| **Virtual** | The computational model — 3D geometry, physics, behaviour rules |
+| **Data Connection** | Real-time bidirectional link — sensor feeds in, control signals out |
 
 ---
 
-## 📊 Slide Index
+## How It Works
 
-| # | Slide | Key Feature |
+```
+Sensors / IoT Devices
+        │
+        ▼
+Edge Computing Node      ← low-latency local processing
+        │
+        ▼
+Cloud / Data Platform    ← storage, long-term analytics, model training
+        │
+        ▼
+AI / ML Models           ← predictions, anomaly detection, optimization
+        │
+        ▼
+Dashboard / Alerts       ← operator decisions, automated control actions
+        │
+        ▼
+Back to Physical Asset   ← closes the loop
+```
+
+---
+
+## Core Capabilities
+
+**Real-Time Monitoring**
+Continuous visibility into the state of every component — no manual inspection lag.
+
+**Predictive Analytics**
+ML models detect patterns that precede failures, flagging issues 24–72 hours before physical manifestation.
+
+**Risk-Free Simulation**
+Run failure scenarios, emergency drills, and design changes in the virtual model — zero impact on the real system.
+
+**Continuous Optimization**
+The twin evaluates operating conditions live and recommends or executes the optimal action automatically.
+
+---
+
+## Digital Twin vs Traditional Simulation
+
+| Aspect | Traditional Simulation | Digital Twin |
 |---|---|---|
-| 01 | **Title** | Animated particle network canvas |
-| 02 | **The Problem** | Animated counters + fatalities bar chart |
-| 03 | **What is a Digital Twin?** | Live mine simulation canvas + video embed |
-| 04 | **Mining Applications** | 6-pillar hover grid |
-| 05 | **Why India Needs This** | Animated progress bars |
-| 06 | **4-Layer Framework** | Doughnut chart + particle flow animation |
-| 07 | **Key Components** | 6-component detail grid |
-| 08 | **Implementation Roadmap** | Phased timeline + animated ROI line chart |
-| 09 | **International Case Studies** | 4 cases with animated metric bars + image slots |
-| 10 | **Expected Benefits** | Animated radar chart (With DT vs Without) |
-| 11 | **Limitations & Challenges** | 6-item limitation grid |
-| 12 | **Future Scope** | Staggered reveal list + video embed |
-| 13 | **Conclusion** | Takeaways + full reference list |
+| Data source | Static / historical input | Live sensor streams |
+| Update frequency | Run on demand | Continuous, real-time |
+| Accuracy over time | Degrades as asset ages | Self-correcting via feedback |
+| Use case | Design & planning | Operations & maintenance |
+| Feedback to asset | None | Active control loop |
 
 ---
 
-## 🎨 Customisation
+## Technology Stack
 
-### CSS Variables
-All colours are defined as CSS custom properties in `style.css`. Change them once to retheme the entire presentation:
-
-```css
-:root {
-  --amber:      #F59E0B;   /* Primary highlight colour */
-  --amber-glow: #FCD34D;   /* Secondary glow colour */
-  --bg:         #080808;   /* Slide background */
-  --surface:    #141414;   /* Card/panel background */
-  --surface2:   #1e1e1e;   /* Input/secondary surface */
-  --border:     #252525;   /* Border colour */
-  --text:       #E8E0D0;   /* Body text */
-  --muted:      #6b6560;   /* Subdued/label text */
-  --accent:     #FF6B35;   /* Orange accent */
-}
 ```
-
-### Adding Your Own Images
-Click the **⚙ gear icon** (top-left corner) during the presentation to open the Image Config panel. Paste any direct image URL into the relevant slot and click **Apply**.
-
-Alternatively, set images directly in `index.html` by replacing the `src=""` on any `<img>` tag:
-
-```html
-<!-- Example: Slide 1 background -->
-<img id="bg-s1" src="https://your-image-url.com/mine.jpg" ...>
-```
-
-**Suggested searches for images:**
-- `"digital twin 3D visualization mine"` → Slide 1 background
-- `"Coal India underground mine Jharia"` → Case study 4
-- `"BHP Olympic Dam mine"` → Case study 1
-- `"Boliden Garpenberg mine Sweden"` → Case study 3
-
-### Adding YouTube Videos
-In the ⚙ config panel, paste only the **video ID** (the part after `?v=` in a YouTube URL).
-
-For example, for `https://www.youtube.com/watch?v=dQw4w9WgXcQ`, paste: `dQw4w9WgXcQ`
-
-Or set it directly in `index.html`:
-```html
-<iframe id="vid-s3" src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&modestbranding=1" ...>
+Layer               Technologies
+─────────────────────────────────────────────────────
+Sensing             IoT sensors, RFID, LiDAR, cameras
+Connectivity        5G, Wi-Fi 6, leaky feeder, LPWAN
+Edge Computing      On-site nodes, fog computing
+Cloud Platform      AWS IoT, Azure Digital Twins, GCP
+Modelling           BIM, CAD, FEM, CFD engines
+AI / ML             LSTM, isolation forests, RL agents
+Visualization       3D dashboards, AR/VR interfaces
 ```
 
 ---
 
-## ⚙️ How It Works
+## Types of Digital Twins
 
-### Slide Engine (`script.js`)
-The deck uses native CSS `scroll-snap` for slide transitions — no animation library needed. An `IntersectionObserver` watches which slide is in view and fires the appropriate canvas/animation initialiser exactly once per slide.
-
-```
-scroll-snap-type: y mandatory  →  CSS handles snapping
-IntersectionObserver            →  triggers animations on entry
-inited Set                      →  ensures each canvas draws only once
-```
-
-### Canvas Charts
-All charts are drawn with the **Canvas 2D API** — no Chart.js or other libraries. Each chart animates on first entry using `requestAnimationFrame` with an **ease-out cubic** function:
-
-```js
-const ease = 1 - Math.pow(1 - progress, 3);
-```
-
-| Canvas ID | Slide | Chart Type |
+| Type | Scope | Example |
 |---|---|---|
-| `c-title` | S1 | Particle network (nodes + connecting lines) |
-| `c-fatal` | S2 | Animated bar chart (DGMS fatality data) |
-| `c-twin` | S3 | Split-screen mine simulation (physical vs digital) |
-| `c-dflow` | S6 | Animated doughnut chart (data volume by layer) |
-| `c-roi` | S8 | Dual-line ROI trajectory chart |
-| `c-radar` | S10 | Radar/spider chart (With DT vs Without DT) |
-
-### Entry Animations
-Slide content fades up on entry using CSS transitions with staggered `transition-delay` values. The `.vis` class is added to the slide by the IntersectionObserver:
-
-```css
-.slide.vis .sc > *:nth-child(1) { opacity: 1; transform: none; transition-delay: .08s; }
-.slide.vis .sc > *:nth-child(2) { opacity: 1; transform: none; transition-delay: .16s; }
-/* ...and so on up to child 7 */
-```
+| **Component Twin** | Single part or sensor | A pump, a motor bearing |
+| **Asset Twin** | Complete machine or system | A conveyor belt system |
+| **Process Twin** | End-to-end workflow | A production line |
+| **System Twin** | Entire facility | A full mine or factory |
 
 ---
 
-## 📚 Academic Content
+## Key Benefits
 
-### Core Theory
-**Grieves' Product Lifecycle Management Model (2002)** — the foundational Digital Twin concept, consisting of three spaces: Physical, Virtual, and the Data Connection linking them bidirectionally.
+- **Downtime reduction** — predictive maintenance replaces time-based schedules; 20–30% fewer unplanned stoppages
+- **Energy efficiency** — demand-driven control cuts energy waste by 25–35% in systems like ventilation
+- **Safety** — hazard prediction and automated alerts reduce incident risk by 40–60%
+- **Cost savings** — fewer physical inspections, faster fault diagnosis, optimized material usage
+- **Planning accuracy** — simulate changes before committing capital
 
-### Data Sources
-| Statistic | Source |
+---
+
+## Challenges
+
+- **High upfront cost** — sensor networks, edge hardware, and cloud infrastructure require significant investment
+- **Data quality** — a twin is only as accurate as its input data; sensor failure or calibration drift degrades the model
+- **Connectivity** — reliable real-time data transmission is difficult in remote or complex physical environments
+- **Skill gap** — operating a digital twin requires engineers fluent in both domain knowledge and data science
+- **Cybersecurity** — operational technology connected to cloud infrastructure creates new attack surfaces
+- **Model drift** — as the physical asset ages or changes, the virtual model must be continuously recalibrated
+
+---
+
+## Applications by Industry
+
+| Industry | Primary Use Case |
 |---|---|
-| Mine fatality data (2016–2022) | DGMS Annual Reports, Govt. of India |
-| 90% DT adoption in mining | Bentley Systems Industry Survey, 2024 |
-| $48B global DT market | McKinsey Global Institute |
-| Ventilation savings (35%) | Codelco El Teniente case, 2022 |
-| Radar benchmark data | CSIRO / Gartner Mining Analytics, 2023 |
-
-### Full Reference List
-1. Grieves, M. (2014). *Digital Twin: Manufacturing Excellence through Virtual Factory Replication.*
-2. DGMS Annual Report (2022). Directorate General of Mines Safety, Government of India.
-3. Cai, P. et al. (2021). Digital twin for coal mines: review and prospects. *Journal of Mining & Safety Engineering.*
-4. Bentley Systems (2024). *State of Digital Twins in Mining — Annual Industry Survey.*
-5. BHP Insights (2025). The role of digital twins and AI in enhancing decision-making. bhp.com
-6. National Mineral Policy (2019). Ministry of Mines, Government of India.
-7. Coal India Limited Technology Innovation Report (2023). CIL Corporate Affairs.
+| Mining | Safety monitoring, ventilation control, equipment health |
+| Manufacturing | Predictive maintenance, production optimization |
+| Aerospace | Engine lifecycle management, structural monitoring |
+| Energy | Wind turbine performance, grid load balancing |
+| Construction | BIM-linked facility management |
+| Healthcare | Patient monitoring, hospital flow simulation |
 
 ---
 
-## 🌐 Browser Compatibility
+## Global Market
 
-| Browser | Support |
+| Year | Market Size |
 |---|---|
-| Chrome 90+ | ✅ Full |
-| Firefox 88+ | ✅ Full |
-| Edge 90+ | ✅ Full |
-| Safari 14+ | ✅ Full |
-| Mobile Chrome/Safari | ✅ Responsive (scroll navigation) |
+| 2020 | ~$3.8B |
+| 2023 | ~$10.1B |
+| 2026 | ~$26B (projected) |
+| 2030 | ~$73B (projected) |
 
-> Keyboard arrow navigation works on desktop only. Touch/swipe scroll works on mobile.
-
----
-
-## 📝 Notes for Presenters
-
-- **Run from a local server** (`npx serve .`) for the best experience — YouTube iframes load reliably and there are no CORS restrictions.
-- **Hide the ⚙ button** before presenting by setting `display:none` on the gear button in `index.html` if you don't want it visible.
-- **Pre-add all images** via the config panel before your presentation slot — don't fumble with URLs on stage.
-- **Rehearse timing** — each slide is designed for approximately 60–90 seconds of speaking time.
-- The **progress bar** at the top and **slide counter** (top-right of each slide) help you track pacing during the Q&A window.
+CAGR: ~40% (2023–2030) — Source: MarketsandMarkets, Gartner
 
 ---
 
-## 🏆 Event Details
+## Key References
 
-**Event:** Rock-On-Pap — Technical Paper Presentation  
-**Institution:** NIT Rourkela, Department of Mining Engineering  
-**Year:** 2026  
-**Duration:** 6–8 min presentation + 5 min Q&A  
-**Topic:** Digital Twin Technology in Mining — Framework for Indian Underground Mines
+- Grieves, M. (2014). *Digital Twin: Manufacturing Excellence through Virtual Factory Replication.*
+- Grieves, M. & Vickers, J. (2017). Digital Twin: Mitigating Unpredictable, Undesirable Emergent Behavior in Complex Systems. *Transdisciplinary Perspectives on Complex Systems.*
+- Tao, F. et al. (2018). Digital Twin-Driven Product Design Framework. *International Journal of Production Research.*
+- IBM Institute for Business Value (2020). *Digital Twins: From Buzzword to Business Value.*
+- Gartner (2023). *Hype Cycle for Emerging Technologies.*
+- Bentley Systems (2024). *State of Digital Twins — Annual Industry Survey.*
 
 ---
 
-*Built with vanilla HTML · CSS · JavaScript — zero dependencies.*
+*Concept origin: Dr. Michael Grieves, University of Michigan, 2002.*
